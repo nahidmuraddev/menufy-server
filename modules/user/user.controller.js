@@ -2,6 +2,7 @@ const User = require("./user.model");
 const bcrcypt = require("bcryptjs");
 const randomstring = require("randomstring");
 const { generateToken, sendVerificationCode } = require("../../utils/auth");
+const { createInitialSetting } = require("../setting/setting.utils");
 
 const registerUser = async (req, res) => {
   try {
@@ -39,6 +40,7 @@ const registerUser = async (req, res) => {
 
       const user = await newUser.save();
       await sendVerificationCode(user, otp);
+      await createInitialSetting({ user: user?._id });
       res.status(200).send({
         message: "We have sent you verification code. Please check your email!",
         status: 200,
