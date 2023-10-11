@@ -35,14 +35,6 @@ const profileSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
-    currency: {
-      type: String,
-      required: true,
-    },
-    language: {
-      type: String,
-      required: true,
-    },
   },
   {
     timestamps: false,
